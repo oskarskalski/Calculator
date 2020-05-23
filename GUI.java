@@ -16,7 +16,7 @@ class GUI {
 
     public BorderPane getLayout(int state) {
         layout = new BorderPane();
-        output = new Label();
+        output = new Label("1");
         vBox = new VBox();
 
         switch (state) {
@@ -41,7 +41,11 @@ class GUI {
         for (String i : tab) {
             Button btn = new Button(i);
             btn.setOnAction(e -> {
+                if(btn.getText().equals("=")){
 
+                }else{
+                    output.setText(validateExpression.validate(output.getText(), btn.getText()));
+                }
             });
 
             hBox.getChildren().add(btn);
