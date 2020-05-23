@@ -41,7 +41,7 @@ class GUI {
         for (String i : tab) {
             Button btn = new Button(i);
             btn.setOnAction(e -> {
-                System.out.println(validateExpression.evaluate("1 + 1 + 2121.1"));
+
             });
 
             hBox.getChildren().add(btn);
