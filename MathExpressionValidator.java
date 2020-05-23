@@ -5,7 +5,9 @@ class MathExpressionValidator {
         StringBuilder sb = new StringBuilder();
         int expressionMathLength = expression.length();
 
-        if (isNumber(character)) {
+        if(expression.equals("0") && isNumber(character)){
+            sb.append(character);
+        }else if (isNumber(character)) {
             if (!isNumber(String.valueOf(expression.charAt(expressionMathLength - 1)))) {
                 sb.append(expression);
                 sb.append(" ");

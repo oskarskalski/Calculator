@@ -16,7 +16,7 @@ class GUI {
 
     public BorderPane getLayout(int state) {
         layout = new BorderPane();
-        output = new Label("1");
+        output = new Label("0");
         vBox = new VBox();
 
         switch (state) {
