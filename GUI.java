@@ -7,6 +7,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import javax.script.ScriptException;
+
 class GUI {
     private HBox hBox;
     private VBox vBox;
@@ -25,7 +27,7 @@ class GUI {
 
                 for(int i = 0; i<5; i++){
                     vBox.getChildren().add(
-                            getBtnsByHorizontalDirection(btnSettings.getBtnNames(i)));
+                            createButtons(btnSettings.getBtnNames(i)));
                 }
 
                 layout.setCenter(vBox);
@@ -35,14 +37,19 @@ class GUI {
         return layout;
     }
 
-    public HBox getBtnsByHorizontalDirection(String... tab) {
+    public HBox createButtons(String... tab) {
         hBox = new HBox();
         MathExpressionValidator validateExpression = new MathExpressionValidator();
+        MathEvaluate mathEvaluate = new MathEvaluate();
         for (String i : tab) {
             Button btn = new Button(i);
             btn.setOnAction(e -> {
                 if(btn.getText().equals("=")){
-
+                    try {
+                        output.setText(mathEvaluate.evaluate(output.getText()));
+                    } catch (ScriptException scriptException) {
+                        scriptException.printStackTrace();
+                    }
                 }else{
                     output.setText(validateExpression.validate(output.getText(), btn.getText()));
                 }
@@ -62,5 +69,14 @@ class GUI {
         }
 
         return vBox;
+    }
+    public <T> HBox getElementsByHorizontalDirection(T... tab) {
+        hBox = new HBox();
+
+        for (T i : tab) {
+            vBox.getChildren().add((Node) i);
+        }
+
+        return hBox;
     }
 }
