@@ -15,15 +15,21 @@ class GUI {
     private BorderPane layout;
     private BtnSettings btnSettings = new BtnSettings();
     private Label output;
+    private Label digits;
 
     public BorderPane getLayout(int state) {
         layout = new BorderPane();
-        output = new Label("0");
         vBox = new VBox();
+
+        output = new Label("0");
+        digits = new Label();
+
+        VBox getLabels = new VBox();
+        getLabels.getChildren().addAll(output, digits);
 
         switch (state) {
             case 0:
-                layout.setTop(output);
+                layout.setTop(getLabels);
 
                 for(int i = 0; i<5; i++){
                     vBox.getChildren().add(
@@ -62,7 +68,7 @@ class GUI {
     }
 
     public <T> VBox getElementsByVerticalDirection(T... tab) {
-        vBox = new VBox();
+        VBox vBox2 = new VBox();
 
         for (T i : tab) {
             vBox.getChildren().add((Node) i);
