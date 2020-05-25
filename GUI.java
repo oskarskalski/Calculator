@@ -15,27 +15,20 @@ class GUI {
     private BorderPane layout;
     private BtnSettings btnSettings = new BtnSettings();
     private Label output;
-    private Label digits;
 
     public BorderPane getLayout(int state) {
         layout = new BorderPane();
         vBox = new VBox();
 
         output = new Label("0");
-        digits = new Label();
-
-        VBox getLabels = new VBox();
-        getLabels.getChildren().addAll(output, digits);
 
         switch (state) {
             case 0:
-                layout.setTop(getLabels);
-
-                for(int i = 0; i<5; i++){
+                vBox.getChildren().add(output);
+                for (int i = 0; i < 5; i++) {
                     vBox.getChildren().add(
                             createButtons(btnSettings.getBtnNames(i)));
                 }
-
                 layout.setCenter(vBox);
                 break;
         }
@@ -49,38 +42,19 @@ class GUI {
         MathEvaluate mathEvaluate = new MathEvaluate();
         for (String i : tab) {
             Button btn = new Button(i);
+
+            try {
+                int parseElToInt = Integer.parseInt(i);
+                btn.setStyle("-fx-background-color: #666666; -fx-text-fill:#ffffff;");
+            } catch (NumberFormatException e) {
+                btn.setStyle("-fx-background-color: #f2f2f2;");
+            }
+
             btn.setOnAction(e -> {
-                if(btn.getText().equals("=")){
-                    try {
-                        output.setText(mathEvaluate.evaluate(output.getText()));
-                    } catch (ScriptException scriptException) {
-                        scriptException.printStackTrace();
-                    }
-                }else{
-                    output.setText(validateExpression.validate(output.getText(), btn.getText()));
-                }
+                output.setText(validateExpression.validate(output.getText(), btn.getText()));
             });
 
             hBox.getChildren().add(btn);
-        }
-
-        return hBox;
-    }
-
-    public <T> VBox getElementsByVerticalDirection(T... tab) {
-        VBox vBox2 = new VBox();
-
-        for (T i : tab) {
-            vBox.getChildren().add((Node) i);
-        }
-
-        return vBox;
-    }
-    public <T> HBox getElementsByHorizontalDirection(T... tab) {
-        hBox = new HBox();
-
-        for (T i : tab) {
-            vBox.getChildren().add((Node) i);
         }
 
         return hBox;

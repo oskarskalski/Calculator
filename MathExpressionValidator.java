@@ -1,6 +1,10 @@
 package sample;
 
+import javax.script.ScriptException;
+
 class MathExpressionValidator {
+
+
     public String validate(String expression, String character) {
         StringBuilder sb = new StringBuilder();
         int expressionMathLength = expression.length();
@@ -11,6 +15,14 @@ class MathExpressionValidator {
                     sb.append(0);
                 } else {
                     sb.append(deleteElementsFromString(expression));
+                }
+                break;
+            case "=":
+                MathEvaluate result = new MathEvaluate();
+                try {
+                    sb.append(result.evaluate(expression));
+                } catch (ScriptException e) {
+                    e.printStackTrace();
                 }
                 break;
             case "+":

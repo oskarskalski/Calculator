@@ -1,0 +1,11 @@
+.button{
+    -fx-pref-width: 1000;
+    -fx-pref-height: 1000;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-cursor: hand;
+}
+
+.button, .label{
+    -fx-font-size: 14pt;
+}
