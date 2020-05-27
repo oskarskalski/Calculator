@@ -11,7 +11,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         GUI gui = new GUI();
 
-        scene = new Scene(gui.getLayout(0), 300, 200);
+        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(450);
+        scene = new Scene(gui.getLayout(0), 450, 500);
         scene.getStylesheets().add(getClass().getResource("main.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
